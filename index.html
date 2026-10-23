@@ -315,20 +315,28 @@
         }
     }
 
+
     async function deleteChecked() {
         if (!window.sharedShopping) {
-            alert("Googleログインしてください。");
-            return;
+        alert("Googleログインしてください。");
+        return;
         }
 
         const targets = items.filter(item => item.checked);
 
+        if (targets.length === 0) {
+        alert("削除する商品にチェックを入れてください。");
+        return;
+        }
+
         try {
             await Promise.all(
-                targets.map(item => window.sharedShopping.deleteItem(item.id))
+                targets.map(item =>
+                window.sharedShopping.deleteItem(item.id)
+                )
             );
         } catch (error) {
-            alert("削除に失敗しました。");
+            alert("削除に失敗しました: " + error.message);
             console.error(error);
         }
     }
