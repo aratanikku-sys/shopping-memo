@@ -475,9 +475,8 @@
   }
 
   window.updateShoppingItems = (newItems) => {
-    // classic scriptのitemsを更新するための関数
+    items = newItems;
     window.items = newItems;
-    document.getElementById("list").innerHTML = "";
     renderSharedItems(newItems);
   };
 
