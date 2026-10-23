@@ -218,35 +218,14 @@
 </div>
 
 <script>
+    let items = [];
 
-    // 買い物リスト
-    let items = JSON.parse(localStorage.getItem("shoppingItems")) || [];
-
-    //ブラウザ保存
-    function saveItems() {
-    localStorage.setItem("shoppingItems", JSON.stringify(items));
-    }
-
-    // 個数を変更
     function changeQuantity(amount) {
-
-        const quantityInput = document.getElementById("quantity");
-
-        let quantity = Number(quantityInput.value);
-
-        quantity += amount;
-
-        if (quantity < 1) {
-            quantity = 1;
-        }
-
-        quantityInput.value = quantity;
+        const input = document.getElementById("quantity");
+        input.value = Math.max(1, Number(input.value) + amount);
     }
 
-
-    // 商品を追加
-    function addItem() {
-
+    async function addItem() {
         const nameInput = document.getElementById("name");
         const quantityInput = document.getElementById("quantity");
         const memoInput = document.getElementById("memo");
@@ -255,53 +234,46 @@
         const quantity = Number(quantityInput.value);
         const memo = memoInput.value.trim();
 
-        // 商品名が空の場合
         if (name === "") {
             alert("商品名を入力してください。");
             return;
         }
 
-        const item = {
-            name: name,
-            quantity: quantity,
-            memo: memo,
-            checked: false
-        };
+        if (!window.sharedShopping) {
+            alert("Googleログインしてください。");
+            return;
+        }
 
-        items.push(item);
-　　　　saveItems();
+        try {
+            await window.sharedShopping.addItem({
+                name,
+                quantity,
+                memo,
+                checked: false
+            });
 
-        // 入力欄を初期化
-        nameInput.value = "";
-        quantityInput.value = 1;
-        memoInput.value = "";
-
-        displayItems();
+            nameInput.value = "";
+            quantityInput.value = 1;
+            memoInput.value = "";
+        } catch (error) {
+            alert("商品の追加に失敗しました。ログイン状態と通信を確認してください。");
+            console.error(error);
+        }
     }
 
-
-    // 商品一覧を表示
     function displayItems() {
-
         const list = document.getElementById("list");
-
         list.innerHTML = "";
 
         if (items.length === 0) {
-
             list.innerHTML = `
-                <div class="empty">
-                    買い物リストは空です。
-                </div>
+                <div class="empty">買い物リストは空です。</div>
             `;
-
             return;
         }
 
         items.forEach((item, index) => {
-
             const div = document.createElement("div");
-
             div.className = "item";
 
             if (item.checked) {
@@ -314,23 +286,14 @@
                     ${item.checked ? "checked" : ""}
                     onchange="toggleItem(${index})"
                 >
-
                 <div class="item-content">
-
-                    <div class="item-name">
-                        ${escapeHTML(item.name)}
-                    </div>
-
-                    <div class="item-quantity">
-                        ${item.quantity}個
-                    </div>
-
+                    <div class="item-name">${escapeHTML(item.name)}</div>
+                    <div class="item-quantity">${item.quantity}個</div>
                     ${
                         item.memo
-                        ? `<div class="item-memo">${escapeHTML(item.memo)}</div>`
-                        : ""
+                            ? `<div class="item-memo">${escapeHTML(item.memo)}</div>`
+                            : ""
                     }
-
                 </div>
             `;
 
@@ -338,44 +301,50 @@
         });
     }
 
+    async function toggleItem(index) {
+        const item = items[index];
+        if (!item || !window.sharedShopping) return;
 
-    // チェック状態を変更
-    function toggleItem(index) {
-
-        items[index].checked = !items[index].checked;
-
-        saveItems();
-        displayItems();
+        try {
+            await window.sharedShopping.updateItem(item.id, {
+                checked: !item.checked
+            });
+        } catch (error) {
+            alert("チェック状態を更新できませんでした。");
+            console.error(error);
+        }
     }
 
+    async function deleteChecked() {
+        if (!window.sharedShopping) {
+            alert("Googleログインしてください。");
+            return;
+        }
 
-    // チェック済みの商品を削除
-    function deleteChecked() {
+        const targets = items.filter(item => item.checked);
 
-        items = items.filter(item => !item.checked);
-
-        saveItems();
-        displayItems();
+        try {
+            await Promise.all(
+                targets.map(item => window.sharedShopping.deleteItem(item.id))
+            );
+        } catch (error) {
+            alert("削除に失敗しました。");
+            console.error(error);
+        }
     }
 
-
-    // HTMLとして解釈されないようにする
     function escapeHTML(text) {
-
         const div = document.createElement("div");
-
         div.textContent = text;
-
         return div.innerHTML;
     }
 
-
-    // 初期表示
     displayItems();
-
 </script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
   import {
     getAuth,
     GoogleAuthProvider,
@@ -383,6 +352,16 @@
     onAuthStateChanged,
     signOut
   } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    onSnapshot
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyARjqUQbzRzCohqksJQLcB6BCJ2aBRMXkI",
@@ -396,14 +375,15 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
   const provider = new GoogleAuthProvider();
+  const itemsRef = collection(db, "shoppingItems");
 
-  window.shoppingAuth = { auth, provider, signInWithPopup, onAuthStateChanged, signOut };
-  const { loginButton, logoutButton, loginStatus } = {
-    loginButton: document.getElementById("loginButton"),
-    logoutButton: document.getElementById("logoutButton"),
-    loginStatus: document.getElementById("loginStatus")
-  };
+  const loginButton = document.getElementById("loginButton");
+  const logoutButton = document.getElementById("logoutButton");
+  const loginStatus = document.getElementById("loginStatus");
+
+  let unsubscribeItems = null;
 
   loginButton.addEventListener("click", async () => {
     try {
@@ -414,21 +394,138 @@
   });
 
   logoutButton.addEventListener("click", async () => {
-    await signOut(auth);
+    try {
+      await signOut(auth);
+    } catch (error) {
+      loginStatus.textContent = "ログアウト失敗: " + error.message;
+    }
   });
 
   onAuthStateChanged(auth, (user) => {
-    if (user) {
-      loginStatus.textContent = "ログイン中: " + user.email;
-      loginButton.hidden = true;
-      logoutButton.hidden = false;
-      console.log("ログインユーザーのUID:", user.uid);
-    } else {
+    if (unsubscribeItems) {
+      unsubscribeItems();
+      unsubscribeItems = null;
+    }
+
+    window.sharedShopping = null;
+    window.items = [];
+
+    if (!user) {
+      itemsClear();
       loginStatus.textContent = "ログインしていません";
       loginButton.hidden = false;
       logoutButton.hidden = true;
+      return;
     }
+
+    loginStatus.textContent = "ログイン中: " + user.email;
+    loginButton.hidden = true;
+    logoutButton.hidden = false;
+
+    window.sharedShopping = {
+      addItem: (data) => addDoc(itemsRef, {
+        ...data,
+        createdAt: Date.now()
+      }),
+
+      updateItem: (id, data) =>
+        updateDoc(doc(db, "shoppingItems", id), data),
+
+      deleteItem: (id) =>
+        deleteDoc(doc(db, "shoppingItems", id))
+    };
+
+    unsubscribeItems = onSnapshot(
+      itemsRef,
+      (snapshot) => {
+        window.items = snapshot.docs.map(document => ({
+          id: document.id,
+          ...document.data()
+        }));
+
+        window.items.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+        // 最初のscriptで使う商品一覧を更新
+        itemsReplace(window.items);
+        loginStatus.textContent = "共有リスト接続中: " + user.email;
+      },
+      (error) => {
+        loginStatus.textContent =
+          "共有リストを読み込めません。権限設定を確認してください。";
+        console.error("Firestore error:", error);
+      }
+    );
   });
+
+  function itemsClear() {
+    itemsReplace([]);
+  }
+
+  function itemsReplace(newItems) {
+    // 最初のscriptのitems変数を更新する
+    window.updateShoppingItems?.(newItems);
+  }
+
+  window.updateShoppingItems = (newItems) => {
+    // classic scriptのitemsを更新するための関数
+    window.items = newItems;
+    document.getElementById("list").innerHTML = "";
+    renderSharedItems(newItems);
+  };
+
+  function renderSharedItems(newItems) {
+    const list = document.getElementById("list");
+    list.innerHTML = "";
+
+    if (newItems.length === 0) {
+      list.innerHTML = '<div class="empty">買い物リストは空です。</div>';
+      return;
+    }
+
+    newItems.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      if (item.checked) div.classList.add("checked");
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = !!item.checked;
+      checkbox.addEventListener("change", async () => {
+        try {
+          await window.sharedShopping.updateItem(item.id, {
+            checked: checkbox.checked
+          });
+        } catch (error) {
+          alert("チェック状態を更新できませんでした。");
+          console.error(error);
+        }
+      });
+
+      const content = document.createElement("div");
+      content.className = "item-content";
+
+      const name = document.createElement("div");
+      name.className = "item-name";
+      name.textContent = item.name;
+
+      const quantity = document.createElement("div");
+      quantity.className = "item-quantity";
+      quantity.textContent = `${item.quantity}個`;
+
+      content.append(name, quantity);
+
+      if (item.memo) {
+        const memo = document.createElement("div");
+        memo.className = "item-memo";
+        memo.textContent = item.memo;
+        content.appendChild(memo);
+      }
+
+      div.append(checkbox, content);
+      list.appendChild(div);
+    });
+  }
 </script>
 </body>
 </html>
