@@ -163,6 +163,11 @@
 </head>
 
 <body>
+<div id="loginArea">
+  <button id="loginButton">Googleでログイン</button>
+  <button id="logoutButton" hidden>ログアウト</button>
+  <p id="loginStatus">ログインしていません</p>
+</div>
 
 <div class="container">
 
@@ -369,6 +374,61 @@
     displayItems();
 
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyARjqUQbzRzCohqksJQLcB6BCJ2aBRMXkI",
+    authDomain: "shopping-memo-cdd46.firebaseapp.com",
+    projectId: "shopping-memo-cdd46",
+    storageBucket: "shopping-memo-cdd46.firebasestorage.app",
+    messagingSenderId: "516050821193",
+    appId: "1:516050821193:web:a285fb3a4d1f383621df98",
+    measurementId: "G-FLXCX0395Y"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  window.shoppingAuth = { auth, provider, signInWithPopup, onAuthStateChanged, signOut };
+  const { loginButton, logoutButton, loginStatus } = {
+    loginButton: document.getElementById("loginButton"),
+    logoutButton: document.getElementById("logoutButton"),
+    loginStatus: document.getElementById("loginStatus")
+  };
+
+  loginButton.addEventListener("click", async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      loginStatus.textContent = "ログイン失敗: " + error.message;
+    }
+  });
+
+  logoutButton.addEventListener("click", async () => {
+    await signOut(auth);
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginStatus.textContent = "ログイン中: " + user.email;
+      loginButton.hidden = true;
+      logoutButton.hidden = false;
+      console.log("ログインユーザーのUID:", user.uid);
+    } else {
+      loginStatus.textContent = "ログインしていません";
+      loginButton.hidden = false;
+      logoutButton.hidden = true;
+    }
+  });
+</script>
 </body>
 </html>
