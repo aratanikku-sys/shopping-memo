@@ -137,10 +137,19 @@
         }
 
         .item.checked .item-name,
-        .item.checked .item-quantity,
-        .item.checked .item-memo {
-            text-decoration: line-through;
-            color: #aaa;
+	.item.checked .item-quantity,
+	.item.checked .item-memo {
+            text-decoration: none;
+        }
+
+	.item.checked {
+   	    background-color: #fff3cd;
+   	    border-color: #ffc107;
+        }
+
+	.item.checked .item-name {
+            font-weight: bold;
+            color: #856404;
         }
 
         .delete-button {
