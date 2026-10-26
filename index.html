@@ -168,6 +168,20 @@
             color: #888;
             padding: 30px 0;
         }
+	.priority-button {
+	    border: none;
+	    background: none;
+	    padding: 4px 0 4px 8px;
+	    font-size: 20px;
+	    letter-spacing: 1px;
+	    cursor: pointer;
+	    white-space: nowrap;
+	    flex-shrink: 0;
+	}
+
+.priority-button:active {
+    opacity: 0.6;
+}
     </style>
 </head>
 
@@ -221,7 +235,7 @@
     <div id="list" class="list"></div>
 
     <button class="delete-button" onclick="deleteChecked()">
-        🗑️ 購入済みを一括削除
+        🗑️ 選択した商品を一括削除
     </button>
 
 </div>
@@ -258,7 +272,8 @@
                 name,
                 quantity,
                 memo,
-                checked: false
+		deleteChecked: false,
+	        priority: 0
             });
 
             nameInput.value = "";
@@ -490,57 +505,116 @@
   };
 
   function renderSharedItems(newItems) {
-    const list = document.getElementById("list");
-    list.innerHTML = "";
+  const list = document.getElementById("list");
+  list.innerHTML = "";
 
-    if (newItems.length === 0) {
-      list.innerHTML = '<div class="empty">買い物リストは空です。</div>';
-      return;
+  if (newItems.length === 0) {
+    list.innerHTML = '<div class="empty">買い物リストは空です。</div>';
+    return;
+  }
+
+  // 優先度が高い順
+  // 同じ優先度なら、削除チェックなし → あり
+  const sortedItems = [...newItems].sort((a, b) => {
+    const priorityA = Number(a.priority || 0);
+    const priorityB = Number(b.priority || 0);
+
+    if (priorityA !== priorityB) {
+      return priorityB - priorityA;
     }
 
-    newItems.forEach((item, index) => {
-      const div = document.createElement("div");
-      div.className = "item";
+    const deleteA = a.deleteChecked ?? a.checked ?? false;
+    const deleteB = b.deleteChecked ?? b.checked ?? false;
 
-      if (item.checked) div.classList.add("checked");
+    if (deleteA !== deleteB) {
+      return deleteA ? 1 : -1;
+    }
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = !!item.checked;
-      checkbox.addEventListener("change", async () => {
-        try {
-          await window.sharedShopping.updateItem(item.id, {
-            checked: checkbox.checked
-          });
-        } catch (error) {
-          alert("チェック状態を更新できませんでした。");
-          console.error(error);
-        }
-      });
+    return (a.createdAt || 0) - (b.createdAt || 0);
+  });
 
-      const content = document.createElement("div");
-      content.className = "item-content";
+  sortedItems.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "item";
 
-      const name = document.createElement("div");
-      name.className = "item-name";
-      name.textContent = item.name;
+    // 削除用チェック
+    const deleteChecked =
+      item.deleteChecked ?? item.checked ?? false;
 
-      const quantity = document.createElement("div");
-      quantity.className = "item-quantity";
-      quantity.textContent = `${item.quantity}個`;
+    if (deleteChecked) {
+      div.classList.add("checked");
+    }
 
-      content.append(name, quantity);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = !!deleteChecked;
 
-      if (item.memo) {
-        const memo = document.createElement("div");
-        memo.className = "item-memo";
-        memo.textContent = item.memo;
-        content.appendChild(memo);
+    checkbox.addEventListener("change", async () => {
+      try {
+        await window.sharedShopping.updateItem(item.id, {
+          deleteChecked: checkbox.checked
+        });
+      } catch (error) {
+        alert("削除チェックの状態を更新できませんでした。");
+        console.error(error);
       }
-
-      div.append(checkbox, content);
-      list.appendChild(div);
     });
+
+    // 商品内容
+    const content = document.createElement("div");
+    content.className = "item-content";
+
+    const name = document.createElement("div");
+    name.className = "item-name";
+    name.textContent = item.name;
+
+    const quantity = document.createElement("div");
+    quantity.className = "item-quantity";
+    quantity.textContent = `${item.quantity}個`;
+
+    content.append(name, quantity);
+
+    if (item.memo) {
+      const memo = document.createElement("div");
+      memo.className = "item-memo";
+      memo.textContent = item.memo;
+      content.appendChild(memo);
+    }
+
+    // 優先度
+    const priority = document.createElement("button");
+    priority.className = "priority-button";
+
+    const currentPriority = Number(item.priority || 0);
+
+    if (currentPriority === 0) {
+      priority.textContent = "☆☆☆";
+    } else if (currentPriority === 1) {
+      priority.textContent = "☆☆★";
+    } else if (currentPriority === 2) {
+      priority.textContent = "☆★★";
+    } else {
+      priority.textContent = "★★★";
+    }
+
+    priority.addEventListener("click", async () => {
+      const nextPriority =
+        currentPriority >= 3 ? 0 : currentPriority + 1;
+
+      try {
+        await window.sharedShopping.updateItem(item.id, {
+          priority: nextPriority
+        });
+      } catch (error) {
+        alert("優先度を更新できませんでした。");
+        console.error(error);
+      }
+    });
+
+    div.append(checkbox, content, priority);
+    list.appendChild(div);
+  });
+}
   }
 </script>
 </body>
