@@ -98,64 +98,64 @@
             text-align: center;          /* 数字を中央に配置する */
             margin: 0;                   /* 下側の余白をなくす */
         }
-	
-	/* 個数と優先度を横並びにする */
-	.quantity-priority {
-	    display: flex;
-	    align-items: flex-end;
-	    gap: 12px;
-	    margin-bottom: 15px;
-	}
 
-	/* 個数と優先度の領域 */
-	.quantity-area,
-	.priority-area {
-	    flex: 1;
-	    min-width: 0;
-	}
+        /* 個数と優先度を横並びにする */
+        .quantity-priority {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
 
-	/* 個数・優先度の設定欄 */
-	.quantity-area label,
-	.priority-area label {
-	    display: block;
-	    margin-bottom: 5px;
-	}
-	
-	/* 優先度の星を横並びにする */
-	.priority-select {
-	    display: flex;
-	    gap: 3px;
-	}
+        /* 個数と優先度の領域 */
+        .quantity-area,
+        .priority-area {
+            flex: 1;
+            min-width: 0;
+        }
 
-	/* 優先度ボタン */
-	.priority-select button {
-	    flex: 1;
- 	   min-width: 0;
- 	   padding: 6px 1px;
- 	   display: flex;
- 	   flex-direction: column;
- 	   align-items: center;
- 	   gap: 3px;
+        /* 個数・優先度の設定欄 */
+        .quantity-area label,
+        .priority-area label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
- 	   font-size: 12px;
- 	   border: 1px solid #ccc;
- 	   border-radius: 6px;
- 	   background: white;
- 	   cursor: pointer;
-	}
+        /* 優先度の星を横並びにする */
+        .priority-select {
+            display: flex;
+            gap: 3px;
+        }
 
-	/* 星の部分 */
-	.priority-select button span:last-child {
- 	   font-size: 11px;
- 	   letter-spacing: -1px;
-	}
+        /* 優先度ボタン */
+        .priority-select button {
+            flex: 1;
+            min-width: 0;
+            padding: 6px 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
 
-	/* 選択中の優先度 */
-	.priority-select button.selected {
-	    background: #e3f2fd;
-	    border: 2px solid #2196f3;
-	    font-weight: bold;
-	}
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* 星の部分 */
+        .priority-select button span:last-child {
+            font-size: 11px;
+            letter-spacing: -1px;
+        }
+
+        /* 選択中の優先度 */
+        .priority-select button.selected {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            font-weight: bold;
+        }
 
         /* 商品追加ボタン */
         .add-button {
@@ -320,65 +320,65 @@
         >
 
         <!-- 個数と優先度の設定 -->
-	<div class="quantity-priority">
+        <div class="quantity-priority">
 
-	    <!-- 個数の入力欄 -->
-	    <div class="quantity-area">
+            <!-- 個数の入力欄 -->
+            <div class="quantity-area">
 
-	        <label for="quantity">個数</label>
+                <label for="quantity">個数</label>
 
-	        <div class="quantity">
+                <div class="quantity">
 
-	            <!-- 個数を1減らす -->
-	            <button type="button" onclick="changeQuantity(-1)">−</button>
+                    <!-- 個数を1減らす -->
+                    <button type="button" onclick="changeQuantity(-1)">−</button>
 
-	            <!-- 個数を直接入力する -->
-	            <input
-	                type="number"
-	                id="quantity"
-	                value="1"
-	                min="1"
-	            >
+                    <!-- 個数を直接入力する -->
+                    <input
+                        type="number"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                    >
 
-	            <!-- 個数を1増やす -->
-	            <button type="button" onclick="changeQuantity(1)">＋</button>
+                    <!-- 個数を1増やす -->
+                    <button type="button" onclick="changeQuantity(1)">＋</button>
 
-	        </div>
-	    </div>
+                </div>
+            </div>
 
-	    <!-- 優先度の設定 -->
-	    <div class="priority-area">
+            <!-- 優先度の設定 -->
+            <div class="priority-area">
 
-	        <label>優先度</label>
+                <label>優先度</label>
 
-	        <div class="priority-select">
-        	     <!-- 優先度0：通常 -->
-	             <button type="button" onclick="selectPriority(0)">
-        	    	<span>通常</span>
-    			<span>☆☆☆</span>
-  		     </button>
+                <div class="priority-select">
+                    <!-- 優先度0：通常 -->
+                    <button type="button" onclick="selectPriority(0)">
+                        <span>通常</span>
+                        <span>☆☆☆</span>
+                    </button>
 
-       		     <!-- 優先度1：低 -->
-    		     <button type="button" onclick="selectPriority(1)">
-   		        <span>低</span>
-     		        <span>☆☆★</span>
-     		     </button>
+                    <!-- 優先度1：低 -->
+                    <button type="button" onclick="selectPriority(1)">
+                        <span>低</span>
+                        <span>☆☆★</span>
+                    </button>
 
-       		     <!-- 優先度2：中 -->
-        	     <button type="button" onclick="selectPriority(2)">
+                    <!-- 優先度2：中 -->
+                    <button type="button" onclick="selectPriority(2)">
                         <span>中</span>
-            		<span>☆★★</span>
-        	     </button>
+                        <span>☆★★</span>
+                    </button>
 
-		     <!-- 優先度3：高 -->
-		     <button type="button" onclick="selectPriority(3)">
-		        <span>高</span>
-	                <span>★★★</span>
-	             </button>
-	        </div>
-	    </div>
+                    <!-- 優先度3：高 -->
+                    <button type="button" onclick="selectPriority(3)">
+                        <span>高</span>
+                        <span>★★★</span>
+                    </button>
+                </div>
+            </div>
 
-	</div>
+        </div>
 
         <!-- 商品のメモ入力欄 -->
         <label for="memo">メモ</label>
@@ -414,6 +414,34 @@
     // 商品一覧を保持する配列
     // Firebaseから取得した商品データが、この配列に入る
     let items = [];
+
+    // -----------------------------------------
+    // 商品の優先度を管理する
+    // -----------------------------------------
+
+    // 現在選択されている優先度
+    // 0：☆☆☆
+    // 1：☆★★
+    // 2：★★★
+    let selectedPriority = 0;
+
+
+    // 優先度を変更する関数
+    window.selectPriority = function(priority) {
+
+        // 選択された優先度を保存する
+        selectedPriority = priority;
+
+        // 優先度選択ボタンを取得する
+        const buttons = document.querySelectorAll(".priority-select button");
+
+        // すべてのボタンの選択状態を更新する
+        buttons.forEach((button, index) => {
+
+            button.classList.toggle("selected", index === priority);
+
+        });
+    };
 
 
     // -----------------------------------------
@@ -454,8 +482,8 @@
 
         const memo = memoInput.value.trim();
 
-	// 選択されている優先度を取得する
-	const priority = selectedPriority;
+        // 選択されている優先度を取得する
+        const priority = selectedPriority;
 
         // 商品名が空欄の場合は追加しない
         if (name === "") {
@@ -463,11 +491,11 @@
             return;
         }
 
-	// 個数が1以上の整数か確認する
-	if (!Number.isInteger(quantity) || quantity < 1) {
- 	    alert("個数は1以上の整数を入力してください。");
- 	    return;
-	}
+        // 個数が1以上の整数か確認する
+        if (!Number.isInteger(quantity) || quantity < 1) {
+            alert("個数は1以上の整数を入力してください。");
+            return;
+        }
 
         // Firebaseとの接続ができているか確認する
         if (!window.sharedShopping) {
@@ -495,8 +523,8 @@
                 deleteChecked: false,
 
                 // 優先度
-		// 選択された優先度を保存する
-		priority: priority
+                // 選択された優先度を保存する
+                priority: priority
 
             });
 
@@ -509,8 +537,8 @@
             // メモ欄を空にする
             memoInput.value = "";
 
-	    // 優先度を☆☆☆に戻す
-	    selectPriority(0);
+            // 優先度を☆☆☆に戻す
+            selectPriority(0);
 
         } catch (error) {
 
@@ -542,8 +570,8 @@
 
         // items配列からcheckedがtrueの商品だけを取り出す
         const targets = items.filter(
-    	    item => item.deleteChecked ?? item.checked ?? false
-	);
+            item => item.deleteChecked ?? item.checked ?? false
+        );
 
 
         // 削除対象の商品が1件もない場合
@@ -556,10 +584,10 @@
             return;
         }
 
-	// 削除前に確認する
-	if (!confirm(`${targets.length}件の商品を削除しますか？`)) {
-	    return;
-	}
+        // 削除前に確認する
+        if (!confirm(`${targets.length}件の商品を削除しますか？`)) {
+            return;
+        }
 
         // 対象の商品をFirebaseから削除する
         try {
