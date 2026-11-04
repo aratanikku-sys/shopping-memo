@@ -124,25 +124,36 @@
 	/* 優先度の星を横並びにする */
 	.priority-select {
 	    display: flex;
-	    gap: 2px;
+	    gap: 3px;
 	}
-	
+
 	/* 優先度ボタン */
 	.priority-select button {
 	    flex: 1;
-	    min-width: 0;
-	    padding: 10px 0;
-	    font-size: 13px;
-	    border: 1px solid #ccc;
-	    border-radius: 6px;
-	    background: white;
-	    cursor: pointer;
+ 	   min-width: 0;
+ 	   padding: 6px 1px;
+ 	   display: flex;
+ 	   flex-direction: column;
+ 	   align-items: center;
+ 	   gap: 3px;
+
+ 	   font-size: 12px;
+ 	   border: 1px solid #ccc;
+ 	   border-radius: 6px;
+ 	   background: white;
+ 	   cursor: pointer;
+	}
+
+	/* 星の部分 */
+	.priority-select button span:last-child {
+ 	   font-size: 11px;
+ 	   letter-spacing: -1px;
 	}
 
 	/* 選択中の優先度 */
 	.priority-select button.selected {
-	    background: #e8f5e9;
-	    border: 2px solid #4caf50;
+	    background: #e3f2fd;
+	    border: 2px solid #2196f3;
 	    font-weight: bold;
 	}
 
@@ -341,12 +352,29 @@
 	        <label>優先度</label>
 
 	        <div class="priority-select">
+        	     <!-- 優先度0：通常 -->
+	             <button type="button" onclick="selectPriority(0)">
+        	    	<span>通常</span>
+    			<span>☆☆☆</span>
+  		     </button>
 
-	            <button type="button" onclick="selectPriority(0)">☆☆☆</button>
-	            <button type="button" onclick="selectPriority(1)">☆☆★</button>
-	            <button type="button" onclick="selectPriority(2)">☆★★</button>
-	            <button type="button" onclick="selectPriority(3)">★★★</button>
+       		     <!-- 優先度1：低 -->
+    		     <button type="button" onclick="selectPriority(1)">
+   		        <span>低</span>
+     		        <span>☆☆★</span>
+     		     </button>
 
+       		     <!-- 優先度2：中 -->
+        	     <button type="button" onclick="selectPriority(2)">
+                        <span>中</span>
+            		<span>☆★★</span>
+        	     </button>
+
+		     <!-- 優先度3：高 -->
+		     <button type="button" onclick="selectPriority(3)">
+		        <span>高</span>
+	                <span>★★★</span>
+	             </button>
 	        </div>
 	    </div>
 
