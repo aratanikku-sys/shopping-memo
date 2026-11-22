@@ -30,10 +30,10 @@
         }
 
         /* 買い物メモ本体の配置 */
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+	.container {
+	    max-width: 960px;    /* PCでは横幅を広く使う */
+	    margin: 0 auto;      /* 左右中央に配置する */
+	}
 
         /* ページのタイトル */
         h1 {
@@ -73,52 +73,18 @@
             resize: vertical;
         }
 
-        /* 個数入力欄と増減ボタンの配置 */
-        .quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+	/* 優先度の設定欄 */
+	.priority-area {
+	    width: 100%;
+	    min-width: 0;
+	    margin-bottom: 15px;
+	}
 
-        /* 個数を増減するボタン */
-        .quantity button {
-            width: 45px;
-            height: 45px;
-            font-size: 24px;
-            border: none;
-            border-radius: 8px;
-            background: #ddd;
-        }
-
-        /* 個数を直接入力する欄 */
-        #quantity {
-            width: 60px;
-            text-align: center;
-            margin: 0;
-        }
-
-        /* 個数と優先度を横並びにする */
-        .quantity-priority {
-            display: flex;
-            align-items: flex-end;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        /* 個数と優先度の領域 */
-        .quantity-area,
-        .priority-area {
-            flex: 1;
-            min-width: 0;
-        }
-
-        /* 個数・優先度の設定欄 */
-        .quantity-area label,
-        .priority-area label {
-            display: block;
-            margin-bottom: 5px;
-        }
+	/* 優先度の項目名 */
+	.priority-area label {
+	    display: block;
+	    margin-bottom: 6px;
+	}
 
         /* 優先度の星を横並びにする */
         .priority-select {
@@ -178,16 +144,19 @@
             margin-bottom: 20px;
         }
 
-        /* 商品1件ごとのカード */
-        .item {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
+	/* 商品1件ごとのカード */
+	.item {
+	    background: white;
+	    border-radius: 12px;
+	    padding: 15px;
+	    margin-bottom: 10px;
+	
+	    /* チェックボックス・商品情報・操作ボタンを配置する */
+	    display: grid;
+	    grid-template-columns: 28px minmax(0, 1fr) auto;
+	    align-items: center;
+	    gap: 14px;
+	}
 
         /* 商品カード内のチェックボックス */
         .item input[type="checkbox"] {
@@ -199,7 +168,7 @@
 
         /* 商品名・個数・メモをまとめる領域 */
         .item-content {
-            flex: 1;
+            min-width: 0;
         }
 
         /* 商品名 */
@@ -222,11 +191,10 @@
         }
 
         /* 削除対象にチェックが付いた商品カードの文字装飾 */
-        .item.checked .item-name,
-        .item.checked .item-quantity,
-        .item.checked .item-memo {
-            text-decoration: none;
-        }
+	.item.checked .item-name,
+	.item.checked .item-memo {
+	    text-decoration: none;
+	}
 
         /* 削除対象にチェックが付いた商品カードの背景 */
         .item.checked {
@@ -384,13 +352,96 @@
         }
 
         /* 商品カード内の操作ボタン配置 */
-        .item-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 8px;
-            flex-shrink: 0;
-        }
+	.item-actions {
+ 	   display: flex;
+ 	   flex-direction: row;
+ 	   align-items: center;
+ 	   justify-content: flex-end;
+  	  gap: 10px;
+ 	   flex-shrink: 0;
+	}
+
+	/* =========================================
+	   スマートフォン用レイアウト
+	   ========================================= */
+
+	@media (max-width: 600px) {
+
+	    /* ページ全体の余白 */
+	    body {
+	        padding: 12px;
+	    }
+
+	    /* メイン画面 */
+	    .container {
+	        max-width: 100%;
+	    }
+
+	    /* タイトル */
+	    h1 {
+	        font-size: 25px;
+	        margin-bottom: 18px;
+	    }
+
+	    /* 商品入力欄 */
+	    .input-area {
+	        padding: 16px;
+	    }
+
+	    /* 商品カード */
+	    .item {
+	        grid-template-columns: 28px minmax(0, 1fr);
+	        gap: 10px;
+	        padding: 12px;
+	    }
+
+	    /* チェックボックス */
+	    .item input[type="checkbox"] {
+	        width: 22px;
+	        height: 22px;
+	    }
+
+	    /* 商品情報 */
+	    .item-content {
+	        min-width: 0;
+	        overflow-wrap: anywhere;
+	    }
+
+	    /* 操作ボタンを商品情報の下に配置する */
+	    .item-actions {
+	        grid-column: 2;
+	        flex-direction: row;
+	        justify-content: flex-end;
+	        align-items: center;
+	        width: 100%;
+	        gap: 10px;
+	    }
+
+	    /* 優先度ボタン */
+	    .priority-button {
+	        font-size: 18px;
+	        padding: 6px 4px;
+	        min-height: 40px;
+	    }
+
+	    /* 編集ボタン */
+	    .edit-button {
+	        min-height: 40px;
+	        padding: 8px 14px;
+	        font-size: 14px;
+	    }
+
+	    /* 一括削除ボタン */
+	    .delete-button {
+	        min-height: 46px;
+	    }
+
+	    /* モーダル */
+	    .modal {
+	        padding: 18px;
+	        max-height: 90vh;
+	    }
+	}
 
     </style>
 </head>
@@ -432,88 +483,40 @@
                 placeholder="例：牛乳"
             >
 
-            <!-- 個数と優先度の設定 -->
-            <div class="quantity-priority">
+            <!-- 優先度の設定 -->
+	<div class="priority-area">
 
-                <!-- 個数の入力欄 -->
-                <div class="quantity-area">
+	    <label>優先度</label>
 
-                    <label for="quantity">個数</label>
+	    <div class="priority-select">
 
-                    <div class="quantity">
+	        <!-- 優先度0：通常 -->
+	        <button type="button" onclick="selectPriority(0)">
+	            <span>通常</span>
+	            <span>☆☆☆</span>
+	        </button>
 
-                        <!-- 個数を1減らす -->
-                        <button
-                            type="button"
-                            onclick="changeQuantity(-1)"
-                        >
-                            −
-                        </button>
+	        <!-- 優先度1：低 -->
+	        <button type="button" onclick="selectPriority(1)">
+	            <span>低</span>
+	            <span>☆☆★</span>
+	        </button>
 
-                        <!-- 個数を直接入力する -->
-                        <input
-                            type="number"
-                            id="quantity"
-                            value="1"
-                            min="1"
-                        >
+	        <!-- 優先度2：中 -->
+	        <button type="button" onclick="selectPriority(2)">
+	            <span>中</span>
+	            <span>☆★★</span>
+	        </button>
+	
+	        <!-- 優先度3：高 -->
+	        <button type="button" onclick="selectPriority(3)">
+	            <span>高</span>
+	            <span>★★★</span>
+	        </button>
+	
+	    </div>
 
-                        <!-- 個数を1増やす -->
-                        <button
-                            type="button"
-                            onclick="changeQuantity(1)"
-                        >
-                            ＋
-                        </button>
-
-                    </div>
-                </div>
-
-                <!-- 優先度の設定 -->
-                <div class="priority-area">
-
-                    <label>優先度</label>
-
-                    <div class="priority-select">
-
-                        <!-- 優先度0：通常 -->
-                        <button
-                            type="button"
-                            onclick="selectPriority(0)"
-                        >
-                            <span>通常</span>
-                            <span>☆☆☆</span>
-                        </button>
-
-                        <!-- 優先度1：低 -->
-                        <button
-                            type="button"
-                            onclick="selectPriority(1)"
-                        >
-                            <span>低</span>
-                            <span>☆☆★</span>
-                        </button>
-
-                        <!-- 優先度2：中 -->
-                        <button
-                            type="button"
-                            onclick="selectPriority(2)"
-                        >
-                            <span>中</span>
-                            <span>☆★★</span>
-                        </button>
-
-                        <!-- 優先度3：高 -->
-                        <button
-                            type="button"
-                            onclick="selectPriority(3)"
-                        >
-                            <span>高</span>
-                            <span>★★★</span>
-                        </button>
-
-                    </div>
-                </div>
+	</div>
 
             </div>
 
@@ -623,18 +626,6 @@
                 type="text"
                 id="editName"
                 placeholder="商品名を入力してください"
-            >
-
-            <!-- 個数 -->
-            <label for="editQuantity">
-                個数
-            </label>
-
-            <input
-                type="number"
-                id="editQuantity"
-                min="1"
-                step="1"
             >
 
             <!-- メモ -->
@@ -858,25 +849,6 @@
         }
     };
 
-
-    // -----------------------------------------
-    // 個数を増減する関数
-    // -----------------------------------------
-
-    // amountには、増やす場合は1、減らす場合は-1が渡される
-    function changeQuantity(amount) {
-
-        // idがquantityである入力欄を取得する
-        const input = document.getElementById("quantity");
-
-        // 個数が1以下になるのを防ぐ
-        input.value = Math.max(
-            1,
-            Number(input.value) + amount
-        );
-    }
-
-
     // -----------------------------------------
     // 商品を追加する関数
     // -----------------------------------------
@@ -886,12 +858,10 @@
 
         // 商品名・個数・メモの入力欄を取得する
         const nameInput = document.getElementById("name");
-        const quantityInput = document.getElementById("quantity");
         const memoInput = document.getElementById("memo");
 
         // 入力された値を取得する
         const name = nameInput.value.trim();
-        const quantity = Number(quantityInput.value);
         const memo = memoInput.value.trim();
 
         // 選択されている優先度を取得する
@@ -900,12 +870,6 @@
         // 商品名が空欄の場合は追加しない
         if (name === "") {
             alert("商品名を入力してください。");
-            return;
-        }
-
-        // 個数が1以上の整数か確認する
-        if (!Number.isInteger(quantity) || quantity < 1) {
-            alert("個数は1以上の整数を入力してください。");
             return;
         }
 
@@ -924,9 +888,6 @@
                 // 商品名
                 name,
 
-                // 個数
-                quantity,
-
                 // メモ
                 memo,
 
@@ -940,9 +901,6 @@
 
             // 商品追加が成功したら入力欄を初期状態に戻す
             nameInput.value = "";
-
-            // 個数を1に戻す
-            quantityInput.value = 1;
 
             // メモ欄を空にする
             memoInput.value = "";
@@ -1340,10 +1298,6 @@
         document.getElementById("editName").value =
             item.name || "";
 
-        // 個数を入力欄に設定する
-        document.getElementById("editQuantity").value =
-            item.quantity || 1;
-
         // メモを入力欄に設定する
         document.getElementById("editMemo").value =
             item.memo || "";
@@ -1385,10 +1339,6 @@
         // 入力欄から情報を取得する
         const name = document.getElementById("editName").value.trim();
 
-        const quantity = Number(
-            document.getElementById("editQuantity").value
-        );
-
         const memo = document.getElementById("editMemo").value.trim();
 
         const priority = Number(
@@ -1403,12 +1353,6 @@
         // 商品名が空欄の場合
         if (name === "") {
             alert("商品名を入力してください。");
-            return;
-        }
-
-        // 個数が1以上の整数であるか確認する
-        if (!Number.isInteger(quantity) || quantity < 1) {
-            alert("個数は1以上の整数を入力してください。");
             return;
         }
 
@@ -1495,10 +1439,14 @@
             await window.sharedShopping.updateItem(
                 editingItemId,
                 {
-                    name: name,
-                    quantity: quantity,
-                    memo: memo,
-                    priority: priority
+                    // 商品名
+	     　　   name: name,
+
+	        　　// メモ
+	        　　memo: memo,
+
+	        　　// 優先度
+	        　　priority: priority
                 }
             );
 
@@ -1643,23 +1591,11 @@
 
             content.className = "item-content";
 
-
-            // 商品名を表示する要素を作成する
-            const name = document.createElement("div");
-
             name.className = "item-name";
             name.textContent = item.name;
 
-
-            // 個数を表示する要素を作成する
-            const quantity = document.createElement("div");
-
-            quantity.className = "item-quantity";
-            quantity.textContent = `${item.quantity}個`;
-
-
-            // 商品名と個数を商品情報の領域に追加する
-            content.append(name, quantity);
+            // 商品名を商品情報の領域に追加する
+            content.appendChild(name);
 
 
             // メモが入力されている場合
