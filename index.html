@@ -278,6 +278,121 @@
         .priority-button:active {
             opacity: 0.6;                /* 少し透明にする */
         }
+	
+	
+        /* =========================================
+           優先度変更・商品編集用モーダル
+           ========================================= */
+
+        /* 画面全体を覆う背景 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        /* モーダル本体 */
+        .modal {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        /* モーダルのタイトル */
+        .modal h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 21px;
+        }
+
+        /* モーダル内の入力欄 */
+        .modal input:not([type="checkbox"]),
+        .modal textarea,
+        .modal select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        /* モーダル内のメモ欄 */
+        .modal textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        /* モーダル内のボタン配置 */
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        /* モーダル内のボタン共通設定 */
+        .modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* キャンセルボタン */
+        .modal-cancel {
+            background: #ddd;
+            color: #333;
+        }
+
+        /* 保存・変更ボタン */
+        .modal-save {
+            background: #2196f3;
+            color: white;
+        }
+
+        /* 編集ボタン */
+        .edit-button {
+            border: none;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        /* 編集ボタンを押している間 */
+        .edit-button:active {
+            opacity: 0.6;
+        }
+
+        /* 商品カード内の操作ボタン配置 */
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            flex-shrink: 0;
+        }
 
     </style>
 </head>
@@ -406,6 +521,140 @@
 
 
 <!-- =========================================
+     優先度変更用モーダル
+     ========================================= -->
+
+<div id="priorityModal" class="modal-overlay" hidden>
+
+    <div class="modal">
+
+        <h2>優先度の変更</h2>
+
+        <p id="priorityItemName"></p>
+
+        <label for="priorityModalSelect">
+            変更先の優先度
+        </label>
+
+        <select id="priorityModalSelect">
+            <option value="0">☆☆☆　通常</option>
+            <option value="1">☆☆★　低</option>
+            <option value="2">☆★★　中</option>
+            <option value="3">★★★　高</option>
+        </select>
+
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="modal-cancel"
+                onclick="closePriorityModal()"
+            >
+                キャンセル
+            </button>
+
+            <button
+                type="button"
+                class="modal-save"
+                onclick="savePriority()"
+            >
+                変更する
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     商品編集用モーダル
+     ========================================= -->
+
+<div id="editModal" class="modal-overlay" hidden>
+
+    <div class="modal">
+
+        <h2>商品情報の編集</h2>
+
+        <!-- 商品名 -->
+        <label for="editName">
+            商品名
+        </label>
+
+        <input
+            type="text"
+            id="editName"
+            placeholder="商品名を入力してください"
+        >
+
+        <!-- 個数 -->
+        <label for="editQuantity">
+            個数
+        </label>
+
+        <input
+            type="number"
+            id="editQuantity"
+            min="1"
+            step="1"
+        >
+
+        <!-- メモ -->
+        <label for="editMemo">
+            メモ（詳細）
+        </label>
+
+        <textarea
+            id="editMemo"
+            placeholder="商品の詳細を入力してください"
+        ></textarea>
+
+        <!-- 優先度 -->
+        <label for="editPriority">
+            優先度
+        </label>
+
+        <select id="editPriority">
+
+            <option value="0">☆☆☆　通常</option>
+
+            <option value="1">☆☆★　低</option>
+
+            <option value="2">☆★★　中</option>
+
+            <option value="3">★★★　高</option>
+
+        </select>
+
+        <!-- 保存・キャンセル -->
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="modal-cancel"
+                onclick="closeEditModal()"
+            >
+                キャンセル
+            </button>
+
+            <button
+                type="button"
+                class="modal-save"
+                onclick="saveEdit()"
+            >
+                保存する
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
      JavaScript①：画面の操作・商品の追加や削除
      ========================================= -->
 
@@ -425,6 +674,13 @@
     // 2：★★★
     let selectedPriority = 0;
 
+　　
+    // -----------------------------------------
+    // 優先度変更モーダルの管理
+    // -----------------------------------------
+
+    // 現在、優先度を変更しようとしている商品
+    let priorityTargetItem = null;
 
     // 優先度を変更する関数
     window.selectPriority = function(priority) {
@@ -442,6 +698,129 @@
 
         });
     };
+
+    // -----------------------------------------
+    // 優先度変更画面を開く
+    // -----------------------------------------
+
+    window.openPriorityModal = function(item) {
+
+        // 変更対象の商品を保存する
+        priorityTargetItem = item;
+
+        // 商品名を表示する
+        document.getElementById("priorityItemName").textContent =
+            "商品「" + item.name + "」の優先度を変更します。";
+
+        // 現在の優先度を選択状態にする
+        document.getElementById("priorityModalSelect").value =
+            String(Number(item.priority || 0));
+
+        // モーダルを表示する
+        document.getElementById("priorityModal").hidden = false;
+    };
+
+
+    // -----------------------------------------
+    // 優先度変更画面を閉じる
+    // -----------------------------------------
+
+    window.closePriorityModal = function() {
+
+        // モーダルを非表示にする
+        document.getElementById("priorityModal").hidden = true;
+
+        // 変更対象の商品をリセットする
+        priorityTargetItem = null;
+    };
+
+
+    // -----------------------------------------
+    // 優先度を変更してFirebaseに保存する
+    // -----------------------------------------
+
+    window.savePriority = async function() {
+
+        // 変更対象の商品が存在するか確認する
+        if (!priorityTargetItem) {
+            return;
+        }
+
+        // 変更先の優先度を取得する
+        const newPriority = Number(
+            document.getElementById("priorityModalSelect").value
+        );
+
+        // 現在の優先度を取得する
+        const currentPriority =
+            Number(priorityTargetItem.priority || 0);
+
+        // 優先度が正しい範囲か確認する
+        if (!Number.isInteger(newPriority) ||
+            newPriority < 0 ||
+            newPriority > 3) {
+
+            alert("正しい優先度を選択してください。");
+            return;
+        }
+
+        // 同じ優先度が選択された場合
+        if (newPriority === currentPriority) {
+
+            alert("優先度に変更はありません。");
+            return;
+        }
+
+        // 変更前と変更後の優先度を表示するための配列
+        const priorityNames = [
+            "☆☆☆（通常）",
+            "☆☆★（低）",
+            "☆★★（中）",
+            "★★★（高）"
+        ];
+
+        // 最終確認
+        const result = confirm(
+            "「" + priorityTargetItem.name + "」の優先度を変更しますか？\n\n" +
+            "現在：" + priorityNames[currentPriority] + "\n" +
+            "変更後：" + priorityNames[newPriority]
+        );
+
+        // 許可されなかった場合
+        if (!result) {
+            return;
+        }
+
+        // Firebaseとの接続を確認する
+        if (!window.sharedShopping) {
+            alert("Googleログインしてください。");
+            return;
+        }
+
+        try {
+
+            // Firebaseの優先度を更新する
+            await window.sharedShopping.updateItem(
+                priorityTargetItem.id,
+                {
+                    priority: newPriority
+                }
+            );
+
+            // 更新成功後に画面を閉じる
+            closePriorityModal();
+
+            // 並べ替えはFirestoreのリアルタイム監視によって
+            // 自動的に実行される
+
+        } catch (error) {
+
+            alert("優先度を更新できませんでした。");
+
+            console.error(error);
+        }
+    };
+
 
 
     // -----------------------------------------
@@ -1123,7 +1502,6 @@
                 content.appendChild(memo);
             }
 
-
             // -----------------------------------------
             // 優先度を表す星ボタンの作成
             // -----------------------------------------
@@ -1134,68 +1512,252 @@
             // priority-buttonというCSSクラスを設定する
             priority.className = "priority-button";
 
-
             // 現在の優先度を取得する
-            // 未設定の場合は0とする
             const currentPriority = Number(item.priority || 0);
 
+            // 優先度に応じて星を表示する
+            const priorityStars = [
+                "☆☆☆",
+                "☆☆★",
+                "☆★★",
+                "★★★"
+            ];
 
-            // 優先度に応じて星の表示を変更する
+            priority.textContent =
+                priorityStars[currentPriority] || "☆☆☆";
 
-            // 優先度0：☆☆☆
-            if (currentPriority === 0) {
-                priority.textContent = "☆☆☆";
+            // 星ボタンを押したときに優先度変更画面を開く
+            priority.addEventListener("click", () => {
 
-            // 優先度1：☆☆★
-            } else if (currentPriority === 1) {
-                priority.textContent = "☆☆★";
+                openPriorityModal(item);
 
-            // 優先度2：☆★★
-            } else if (currentPriority === 2) {
-                priority.textContent = "☆★★";
+            });
 
-            // 優先度3：★★★
-            } else {
-                priority.textContent = "★★★";
+	　　
+    // -----------------------------------------
+    // 商品編集モーダルの管理
+    // -----------------------------------------
+
+    // 現在編集している商品のID
+    let editingItemId = null;
+
+
+    // -----------------------------------------
+    // 商品編集画面を開く
+    // -----------------------------------------
+
+    window.openEditModal = function(item) {
+
+        // 編集対象の商品IDを保存する
+        editingItemId = item.id;
+
+        // 商品名を入力欄に設定する
+        document.getElementById("editName").value =
+            item.name || "";
+
+        // 個数を入力欄に設定する
+        document.getElementById("editQuantity").value =
+            item.quantity || 1;
+
+        // メモを入力欄に設定する
+        document.getElementById("editMemo").value =
+            item.memo || "";
+
+        // 優先度を入力欄に設定する
+        document.getElementById("editPriority").value =
+            String(Number(item.priority || 0));
+
+        // 編集画面を表示する
+        document.getElementById("editModal").hidden = false;
+    };
+
+
+    // -----------------------------------------
+    // 商品編集画面を閉じる
+    // -----------------------------------------
+
+    window.closeEditModal = function() {
+
+        // 編集画面を非表示にする
+        document.getElementById("editModal").hidden = true;
+
+        // 編集対象の商品IDをリセットする
+        editingItemId = null;
+    };
+
+
+    // -----------------------------------------
+    // 商品情報を保存する
+    // -----------------------------------------
+
+    window.saveEdit = async function() {
+
+        // 編集対象の商品IDが存在するか確認する
+        if (!editingItemId) {
+            return;
+        }
+
+        // 入力欄から情報を取得する
+        const name = document.getElementById("editName").value.trim();
+
+        const quantity = Number(
+            document.getElementById("editQuantity").value
+        );
+
+        const memo = document.getElementById("editMemo").value.trim();
+
+        const priority = Number(
+            document.getElementById("editPriority").value
+        );
+
+        // 商品名が空欄の場合
+        if (name === "") {
+            alert("商品名を入力してください。");
+            return;
+        }
+
+        // 個数が1以上の整数であるか確認する
+        if (!Number.isInteger(quantity) || quantity < 1) {
+            alert("個数は1以上の整数を入力してください。");
+            return;
+        }
+
+        // 優先度が正しい範囲か確認する
+        if (!Number.isInteger(priority) ||
+            priority < 0 ||
+            priority > 3) {
+
+            alert("正しい優先度を選択してください。");
+            return;
+        }
+
+        // Firebaseとの接続を確認する
+        if (!window.sharedShopping) {
+            alert("Googleログインしてください。");
+            return;
+        }
+
+        // 現在の商品情報を取得する
+        const currentItem = items.find(
+            item => item.id === editingItemId
+        );
+
+        // 商品がすでに削除されている場合
+        if (!currentItem) {
+            alert("編集対象の商品が見つかりません。");
+            closeEditModal();
+            return;
+        }
+
+        // 優先度が変更されているか確認する
+        const currentPriority = Number(currentItem.priority || 0);
+
+        if (priority !== currentPriority) {
+
+            const priorityNames = [
+                "☆☆☆（通常）",
+                "☆☆★（低）",
+                "☆★★（中）",
+                "★★★（高）"
+            ];
+
+            // 優先度変更の最終確認
+            const result = confirm(
+                "商品の情報を保存します。\n\n" +
+                "優先度も変更されます。\n\n" +
+                "現在：" + priorityNames[currentPriority] + "\n" +
+                "変更後：" + priorityNames[priority] + "\n\n" +
+                "この内容で保存しますか？"
+            );
+
+            // キャンセルされた場合
+            if (!result) {
+                return;
             }
 
+        } else {
 
-            // 星ボタンがクリックされたときの処理
-            priority.addEventListener("click", async () => {
+            // 優先度に変更がない場合も保存確認を行う
+            if (!confirm("商品情報を保存しますか？")) {
+                return;
+            }
+        }
 
-                // 次の優先度を決定する
-                // 3以上なら0に戻し、それ以外なら1増やす
-                const nextPriority =
-                    currentPriority >= 3 ? 0 : currentPriority + 1;
+        try {
 
-
-                try {
-
-                    // 新しい優先度をFirestoreに保存する
-                    await window.sharedShopping.updateItem(item.id, {
-                        priority: nextPriority
-                    });
-
-                } catch (error) {
-
-                    // 優先度の更新に失敗した場合のメッセージ
-                    alert("優先度を更新できませんでした。");
-
-                    // エラーの詳細を表示する
-                    console.error(error);
+            // Firebaseの商品情報を更新する
+            await window.sharedShopping.updateItem(
+                editingItemId,
+                {
+                    name: name,
+                    quantity: quantity,
+                    memo: memo,
+                    priority: priority
                 }
+            );
+
+            // 保存成功後に編集画面を閉じる
+            closeEditModal();
+
+            // 商品一覧はFirestoreのリアルタイム監視によって
+            // 自動的に更新される
+
+        } catch (error) {
+
+            alert("商品情報の更新に失敗しました。");
+
+            console.error(error);
+        }
+    };
+
+
+            
+            // -----------------------------------------
+            // 商品編集ボタンの作成
+            // -----------------------------------------
+
+            // 編集ボタンを作成する
+            const editButton = document.createElement("button");
+
+            // CSSクラスを設定する
+            editButton.className = "edit-button";
+
+            // ボタンに表示する文字
+            editButton.textContent = "✏️ 編集";
+
+            // 編集ボタンが押されたときの処理
+            editButton.addEventListener("click", () => {
+
+                // 対象商品の編集画面を開く
+                openEditModal(item);
+
             });
+
+
+            // -----------------------------------------
+            // 商品カード内の操作領域
+            // -----------------------------------------
+
+            // 星ボタンと編集ボタンをまとめる
+            const actions = document.createElement("div");
+
+            // CSSクラスを設定する
+            actions.className = "item-actions";
+
+            // 星ボタンと編集ボタンを追加する
+            actions.append(priority, editButton);
 
 
             // -----------------------------------------
             // 商品カードを完成させて画面に追加する
             // -----------------------------------------
 
-            // 左から順に、チェックボックス・商品情報・星ボタンを配置する
-            div.append(checkbox, content, priority);
+            // 左からチェックボックス・商品情報・操作ボタンを配置する
+            div.append(checkbox, content, actions);
 
             // 完成した商品カードを商品一覧に追加する
             list.appendChild(div);
+
         });
     }
 
