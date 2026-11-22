@@ -17,86 +17,85 @@
 
         /* すべてのHTML要素に共通する設定 */
         * {
-            /* widthやheightにpaddingとborderを含めて計算する */
             box-sizing: border-box;
         }
 
         /* ページ全体の基本設定 */
         body {
-            margin: 0;                  /* ブラウザ標準の外側余白をなくす */
-            padding: 20px;               /* 画面の内側に20pxの余白を設ける */
-            font-family: sans-serif;     /* 標準的なゴシック系フォントを使用 */
-            background: #f5f5f5;         /* ページ全体の背景色 */
-            color: #333;                 /* 基本の文字色 */
+            margin: 0;
+            padding: 20px;
+            font-family: sans-serif;
+            background: #f5f5f5;
+            color: #333;
         }
 
         /* 買い物メモ本体の配置 */
         .container {
-            max-width: 600px;            /* 最大横幅を600pxに制限する */
-            margin: 0 auto;              /* 左右の余白を自動にして中央配置する */
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* ページのタイトル */
         h1 {
-            text-align: center;          /* 文字を中央に配置する */
-            margin-bottom: 25px;         /* 下側に余白を設ける */
+            text-align: center;
+            margin-bottom: 25px;
         }
 
         /* 商品の入力欄全体 */
         .input-area {
-            background: white;           /* 背景を白色にする */
-            padding: 20px;               /* 内側に余白を設ける */
-            border-radius: 12px;         /* 角を丸くする */
-            margin-bottom: 20px;         /* 下側に余白を設ける */
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
         /* 入力欄の項目名 */
         label {
-            display: block;              /* 独立した行に表示する */
-            font-weight: bold;           /* 太字にする */
-            margin-bottom: 6px;          /* 下側に余白を設ける */
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
         }
 
         /* inputとtextareaに共通するデザイン */
         input:not([type="checkbox"]),
         textarea {
-            width: 100%;                 /* 親要素の横幅いっぱいに広げる */
-            padding: 12px;               /* 内側に余白を設ける */
-            font-size: 16px;             /* 文字サイズ */
-            border: 1px solid #ccc;      /* 枠線を設定する */
-            border-radius: 8px;          /* 角を丸くする */
-            margin-bottom: 15px;         /* 下側に余白を設ける */
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         /* メモ入力欄の設定 */
         textarea {
-            height: 80px;                /* 高さを80pxにする */
-            resize: vertical;             /* 縦方向のみサイズ変更可能にする */
+            height: 80px;
+            resize: vertical;
         }
 
         /* 個数入力欄と増減ボタンの配置 */
         .quantity {
-            display: flex;               /* 子要素を横並びにする */
-            align-items: center;         /* 子要素を上下中央に揃える */
-            gap: 10px;                   /* 子要素同士の間隔 */
-            margin-bottom: 15px;         /* 下側の余白 */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         /* 個数を増減するボタン */
         .quantity button {
-            width: 45px;                 /* 横幅 */
-            height: 45px;                /* 高さ */
-            font-size: 24px;             /* ＋・−の文字サイズ */
-            border: none;                /* 枠線をなくす */
-            border-radius: 8px;          /* 角を丸くする */
-            background: #ddd;            /* 背景色 */
+            width: 45px;
+            height: 45px;
+            font-size: 24px;
+            border: none;
+            border-radius: 8px;
+            background: #ddd;
         }
 
         /* 個数を直接入力する欄 */
         #quantity {
-            width: 60px;                 /* 横幅を60pxにする */
-            text-align: center;          /* 数字を中央に配置する */
-            margin: 0;                   /* 下側の余白をなくす */
+            width: 60px;
+            text-align: center;
+            margin: 0;
         }
 
         /* 個数と優先度を横並びにする */
@@ -136,7 +135,6 @@
             flex-direction: column;
             align-items: center;
             gap: 3px;
-
             font-size: 12px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -159,127 +157,125 @@
 
         /* 商品追加ボタン */
         .add-button {
-            width: 100%;                 /* 横幅いっぱいに広げる */
-            padding: 14px;               /* 内側の余白 */
-            font-size: 17px;             /* 文字サイズ */
-            font-weight: bold;           /* 太字にする */
-            border: none;                /* 枠線をなくす */
-            border-radius: 8px;          /* 角を丸くする */
-            background: #4caf50;         /* 背景色を緑にする */
-            color: white;                /* 文字色を白にする */
-            cursor: pointer;             /* マウスを乗せたときに指の形にする */
+            width: 100%;
+            padding: 14px;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            background: #4caf50;
+            color: white;
+            cursor: pointer;
         }
 
         /* 商品追加ボタンを押している間の表示 */
         .add-button:active {
-            opacity: 0.7;                /* 少し透明にする */
+            opacity: 0.7;
         }
 
         /* 商品一覧全体 */
         .list {
-            margin-bottom: 20px;         /* 下側に余白を設ける */
+            margin-bottom: 20px;
         }
 
         /* 商品1件ごとのカード */
         .item {
-            background: white;           /* 背景色 */
-            border-radius: 12px;         /* 角を丸くする */
-            padding: 15px;               /* 内側の余白 */
-            margin-bottom: 10px;         /* 商品同士の間隔 */
-
-            display: flex;               /* 子要素を横並びにする */
-            align-items: flex-start;     /* 子要素を上揃えにする */
-            gap: 12px;                   /* 子要素同士の間隔 */
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
         }
 
         /* 商品カード内のチェックボックス */
         .item input[type="checkbox"] {
-            width: 24px;                 /* 横幅 */
-            height: 24px;                /* 高さ */
-            margin: 2px 0 0 0;            /* 上側だけ少し余白を設ける */
-            flex-shrink: 0;              /* 横幅が縮まないようにする */
+            width: 24px;
+            height: 24px;
+            margin: 2px 0 0 0;
+            flex-shrink: 0;
         }
 
         /* 商品名・個数・メモをまとめる領域 */
         .item-content {
-            flex: 1;                     /* 余っている横幅をすべて使う */
+            flex: 1;
         }
 
         /* 商品名 */
         .item-name {
-            font-size: 18px;             /* 文字サイズ */
-            font-weight: bold;           /* 太字にする */
+            font-size: 18px;
+            font-weight: bold;
         }
 
         /* 商品の個数 */
         .item-quantity {
-            margin-top: 4px;             /* 上側の余白 */
-            color: #666;                 /* 文字色を灰色にする */
+            margin-top: 4px;
+            color: #666;
         }
 
         /* 商品のメモ */
         .item-memo {
-            margin-top: 6px;             /* 上側の余白 */
-            color: #555;                 /* 文字色 */
-            white-space: pre-wrap;       /* 入力された改行をそのまま表示する */
+            margin-top: 6px;
+            color: #555;
+            white-space: pre-wrap;
         }
 
         /* 削除対象にチェックが付いた商品カードの文字装飾 */
         .item.checked .item-name,
         .item.checked .item-quantity,
         .item.checked .item-memo {
-            text-decoration: none;      /* 取り消し線を付けない */
+            text-decoration: none;
         }
 
         /* 削除対象にチェックが付いた商品カードの背景 */
         .item.checked {
-            background-color: #fff3cd;  /* 背景を薄い黄色にする */
-            border-color: #ffc107;      /* 枠線の色 */
+            background-color: #fff3cd;
+            border-color: #ffc107;
         }
 
         /* チェック済み商品の商品名 */
         .item.checked .item-name {
-            font-weight: bold;           /* 太字にする */
-            color: #856404;              /* 文字色を茶色にする */
+            font-weight: bold;
+            color: #856404;
         }
 
         /* 一括削除ボタン */
         .delete-button {
-            width: 100%;                 /* 横幅いっぱいに広げる */
-            padding: 14px;               /* 内側の余白 */
-            font-size: 16px;             /* 文字サイズ */
-            border: none;                /* 枠線をなくす */
-            border-radius: 8px;          /* 角を丸くする */
-            background: #e53935;         /* 背景色を赤にする */
-            color: white;                /* 文字色を白にする */
-            cursor: pointer;             /* マウスを乗せると指の形にする */
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #e53935;
+            color: white;
+            cursor: pointer;
         }
 
         /* 商品が1件もない場合に表示する文章 */
         .empty {
-            text-align: center;          /* 文字を中央に配置する */
-            color: #888;                 /* 文字色 */
-            padding: 30px 0;             /* 上下に余白を設ける */
+            text-align: center;
+            color: #888;
+            padding: 30px 0;
         }
 
         /* 優先度を表す星ボタン */
         .priority-button {
-            border: none;                /* 枠線をなくす */
-            background: none;            /* 背景色をなくす */
-            padding: 4px 0 4px 8px;      /* 内側の余白 */
-            font-size: 20px;             /* 星の大きさ */
-            letter-spacing: 1px;         /* 星同士の間隔 */
-            cursor: pointer;             /* 指の形にする */
-            white-space: nowrap;         /* 星を途中で改行しない */
-            flex-shrink: 0;              /* 横幅が縮まないようにする */
+            border: none;
+            background: none;
+            padding: 4px 0 4px 8px;
+            font-size: 20px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         /* 星ボタンを押している間の表示 */
         .priority-button:active {
-            opacity: 0.6;                /* 少し透明にする */
+            opacity: 0.6;
         }
-	
-	
+
         /* =========================================
            優先度変更・商品編集用モーダル
            ========================================= */
@@ -292,13 +288,16 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             padding: 20px;
             z-index: 1000;
+        }
+
+        /* hidden属性が付いているモーダルは非表示にする */
+        .modal-overlay[hidden] {
+            display: none !important;
         }
 
         /* モーダル本体 */
@@ -308,7 +307,6 @@
             max-width: 400px;
             max-height: 90vh;
             overflow-y: auto;
-
             padding: 22px;
             border-radius: 12px;
         }
@@ -399,288 +397,323 @@
 
 <body>
 
-<!-- =========================================
-     HTML：画面に表示する要素を作る部分
-     ========================================= -->
+    <!-- =========================================
+         HTML：画面に表示する要素を作る部分
+         ========================================= -->
 
-<!-- Googleログイン・ログアウトの操作領域 -->
-<div id="loginArea">
+    <!-- Googleログイン・ログアウトの操作領域 -->
+    <div id="loginArea">
 
-    <!-- Googleログインを開始するボタン -->
-    <button id="loginButton">Googleでログイン</button>
+        <!-- Googleログインを開始するボタン -->
+        <button id="loginButton">Googleでログイン</button>
 
-    <!-- ログアウトするボタン。最初はhiddenによって非表示 -->
-    <button id="logoutButton" hidden>ログアウト</button>
+        <!-- ログアウトするボタン。最初はhiddenによって非表示 -->
+        <button id="logoutButton" hidden>ログアウト</button>
 
-    <!-- 現在のログイン状態を表示する場所 -->
-    <p id="loginStatus">ログインしていません</p>
+        <!-- 現在のログイン状態を表示する場所 -->
+        <p id="loginStatus">ログインしていません</p>
 
-</div>
+    </div>
 
-<!-- 買い物メモのメイン画面 -->
-<div class="container">
+    <!-- 買い物メモのメイン画面 -->
+    <div class="container">
 
-    <!-- ページタイトル -->
-    <h1>🛒 買い物メモ</h1>
+        <!-- ページタイトル -->
+        <h1>🛒 買い物メモ</h1>
 
-    <!-- 商品情報を入力する領域 -->
-    <div class="input-area">
+        <!-- 商品情報を入力する領域 -->
+        <div class="input-area">
 
-        <!-- 商品名の入力欄 -->
-        <label for="name">商品名</label>
-        <input
-            type="text"
-            id="name"
-            placeholder="例：牛乳"
-        >
+            <!-- 商品名の入力欄 -->
+            <label for="name">商品名</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="例：牛乳"
+            >
 
-        <!-- 個数と優先度の設定 -->
-        <div class="quantity-priority">
+            <!-- 個数と優先度の設定 -->
+            <div class="quantity-priority">
 
-            <!-- 個数の入力欄 -->
-            <div class="quantity-area">
+                <!-- 個数の入力欄 -->
+                <div class="quantity-area">
 
-                <label for="quantity">個数</label>
+                    <label for="quantity">個数</label>
 
-                <div class="quantity">
+                    <div class="quantity">
 
-                    <!-- 個数を1減らす -->
-                    <button type="button" onclick="changeQuantity(-1)">−</button>
+                        <!-- 個数を1減らす -->
+                        <button
+                            type="button"
+                            onclick="changeQuantity(-1)"
+                        >
+                            −
+                        </button>
 
-                    <!-- 個数を直接入力する -->
-                    <input
-                        type="number"
-                        id="quantity"
-                        value="1"
-                        min="1"
-                    >
+                        <!-- 個数を直接入力する -->
+                        <input
+                            type="number"
+                            id="quantity"
+                            value="1"
+                            min="1"
+                        >
 
-                    <!-- 個数を1増やす -->
-                    <button type="button" onclick="changeQuantity(1)">＋</button>
+                        <!-- 個数を1増やす -->
+                        <button
+                            type="button"
+                            onclick="changeQuantity(1)"
+                        >
+                            ＋
+                        </button>
 
+                    </div>
                 </div>
+
+                <!-- 優先度の設定 -->
+                <div class="priority-area">
+
+                    <label>優先度</label>
+
+                    <div class="priority-select">
+
+                        <!-- 優先度0：通常 -->
+                        <button
+                            type="button"
+                            onclick="selectPriority(0)"
+                        >
+                            <span>通常</span>
+                            <span>☆☆☆</span>
+                        </button>
+
+                        <!-- 優先度1：低 -->
+                        <button
+                            type="button"
+                            onclick="selectPriority(1)"
+                        >
+                            <span>低</span>
+                            <span>☆☆★</span>
+                        </button>
+
+                        <!-- 優先度2：中 -->
+                        <button
+                            type="button"
+                            onclick="selectPriority(2)"
+                        >
+                            <span>中</span>
+                            <span>☆★★</span>
+                        </button>
+
+                        <!-- 優先度3：高 -->
+                        <button
+                            type="button"
+                            onclick="selectPriority(3)"
+                        >
+                            <span>高</span>
+                            <span>★★★</span>
+                        </button>
+
+                    </div>
+                </div>
+
             </div>
 
-            <!-- 優先度の設定 -->
-            <div class="priority-area">
+            <!-- 商品のメモ入力欄 -->
+            <label for="memo">メモ</label>
+            <textarea
+                id="memo"
+                placeholder="例：低脂肪乳"
+            ></textarea>
 
-                <label>優先度</label>
-
-                <div class="priority-select">
-                    <!-- 優先度0：通常 -->
-                    <button type="button" onclick="selectPriority(0)">
-                        <span>通常</span>
-                        <span>☆☆☆</span>
-                    </button>
-
-                    <!-- 優先度1：低 -->
-                    <button type="button" onclick="selectPriority(1)">
-                        <span>低</span>
-                        <span>☆☆★</span>
-                    </button>
-
-                    <!-- 優先度2：中 -->
-                    <button type="button" onclick="selectPriority(2)">
-                        <span>中</span>
-                        <span>☆★★</span>
-                    </button>
-
-                    <!-- 優先度3：高 -->
-                    <button type="button" onclick="selectPriority(3)">
-                        <span>高</span>
-                        <span>★★★</span>
-                    </button>
-                </div>
-            </div>
+            <!-- addItem()を実行して商品をリストに追加する -->
+            <button
+                class="add-button"
+                onclick="addItem()"
+            >
+                ＋ 買い物リストに追加
+            </button>
 
         </div>
 
-        <!-- 商品のメモ入力欄 -->
-        <label for="memo">メモ</label>
-        <textarea
-            id="memo"
-            placeholder="例：低脂肪乳"
-        ></textarea>
+        <!-- JavaScriptによって商品一覧を表示する場所 -->
+        <div id="list" class="list"></div>
 
-        <!-- addItem()を実行して商品をリストに追加する -->
-        <button class="add-button" onclick="addItem()">
-            ＋ 買い物リストに追加
+        <!-- deleteChecked()を実行してチェックした商品をまとめて削除する -->
+        <button
+            class="delete-button"
+            onclick="deleteChecked()"
+        >
+            🗑️ 選択した商品を一括削除
         </button>
 
     </div>
 
-    <!-- JavaScriptによって商品一覧を表示する場所 -->
-    <div id="list" class="list"></div>
 
-    <!-- deleteChecked()を実行してチェックした商品をまとめて削除する -->
-    <button class="delete-button" onclick="deleteChecked()">
-        🗑️ 選択した商品を一括削除
-    </button>
+    <!-- =========================================
+         優先度変更用モーダル
+         ========================================= -->
 
-</div>
+    <div
+        id="priorityModal"
+        class="modal-overlay"
+        hidden
+    >
 
+        <div class="modal">
 
-<!-- =========================================
-     優先度変更用モーダル
-     ========================================= -->
+            <h2>優先度の変更</h2>
 
-<div id="priorityModal" class="modal-overlay" hidden>
+            <p id="priorityItemName"></p>
 
-    <div class="modal">
+            <label for="priorityModalSelect">
+                変更先の優先度
+            </label>
 
-        <h2>優先度の変更</h2>
+            <select id="priorityModalSelect">
+                <option value="0">☆☆☆ 通常</option>
+                <option value="1">☆☆★ 低</option>
+                <option value="2">☆★★ 中</option>
+                <option value="3">★★★ 高</option>
+            </select>
 
-        <p id="priorityItemName"></p>
+            <div class="modal-buttons">
 
-        <label for="priorityModalSelect">
-            変更先の優先度
-        </label>
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closePriorityModal()"
+                >
+                    キャンセル
+                </button>
 
-        <select id="priorityModalSelect">
-            <option value="0">☆☆☆　通常</option>
-            <option value="1">☆☆★　低</option>
-            <option value="2">☆★★　中</option>
-            <option value="3">★★★　高</option>
-        </select>
+                <button
+                    type="button"
+                    class="modal-save"
+                    onclick="savePriority()"
+                >
+                    変更する
+                </button>
 
-        <div class="modal-buttons">
-
-            <button
-                type="button"
-                class="modal-cancel"
-                onclick="closePriorityModal()"
-            >
-                キャンセル
-            </button>
-
-            <button
-                type="button"
-                class="modal-save"
-                onclick="savePriority()"
-            >
-                変更する
-            </button>
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
+    <!-- =========================================
+         商品編集用モーダル
+         ========================================= -->
 
-<!-- =========================================
-     商品編集用モーダル
-     ========================================= -->
+    <div
+        id="editModal"
+        class="modal-overlay"
+        hidden
+    >
 
-<div id="editModal" class="modal-overlay" hidden>
+        <div class="modal">
 
-    <div class="modal">
+            <h2>商品情報の編集</h2>
 
-        <h2>商品情報の編集</h2>
+            <!-- 商品名 -->
+            <label for="editName">
+                商品名
+            </label>
 
-        <!-- 商品名 -->
-        <label for="editName">
-            商品名
-        </label>
-
-        <input
-            type="text"
-            id="editName"
-            placeholder="商品名を入力してください"
-        >
-
-        <!-- 個数 -->
-        <label for="editQuantity">
-            個数
-        </label>
-
-        <input
-            type="number"
-            id="editQuantity"
-            min="1"
-            step="1"
-        >
-
-        <!-- メモ -->
-        <label for="editMemo">
-            メモ（詳細）
-        </label>
-
-        <textarea
-            id="editMemo"
-            placeholder="商品の詳細を入力してください"
-        ></textarea>
-
-        <!-- 優先度 -->
-        <label for="editPriority">
-            優先度
-        </label>
-
-        <select id="editPriority">
-
-            <option value="0">☆☆☆　通常</option>
-
-            <option value="1">☆☆★　低</option>
-
-            <option value="2">☆★★　中</option>
-
-            <option value="3">★★★　高</option>
-
-        </select>
-
-        <!-- 保存・キャンセル -->
-        <div class="modal-buttons">
-
-            <button
-                type="button"
-                class="modal-cancel"
-                onclick="closeEditModal()"
+            <input
+                type="text"
+                id="editName"
+                placeholder="商品名を入力してください"
             >
-                キャンセル
-            </button>
 
-            <button
-                type="button"
-                class="modal-save"
-                onclick="saveEdit()"
+            <!-- 個数 -->
+            <label for="editQuantity">
+                個数
+            </label>
+
+            <input
+                type="number"
+                id="editQuantity"
+                min="1"
+                step="1"
             >
-                保存する
-            </button>
+
+            <!-- メモ -->
+            <label for="editMemo">
+                メモ（詳細）
+            </label>
+
+            <textarea
+                id="editMemo"
+                placeholder="商品の詳細を入力してください"
+            ></textarea>
+
+            <!-- 優先度 -->
+            <label for="editPriority">
+                優先度
+            </label>
+
+            <select id="editPriority">
+                <option value="0">☆☆☆ 通常</option>
+                <option value="1">☆☆★ 低</option>
+                <option value="2">☆★★ 中</option>
+                <option value="3">★★★ 高</option>
+            </select>
+
+            <!-- 保存・キャンセル -->
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    class="modal-cancel"
+                    onclick="closeEditModal()"
+                >
+                    キャンセル
+                </button>
+
+                <button
+                    type="button"
+                    class="modal-save"
+                    onclick="saveEdit()"
+                >
+                    保存する
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
-
-<!-- =========================================
-     JavaScript①：画面の操作・商品の追加や削除
-     ========================================= -->
-
+    <!-- =========================================
+         JavaScript①：画面の操作・商品の追加や削除
+         ========================================= -->
 <script>
 
-    // 商品一覧を保持する配列
+        // 商品一覧を保持する配列
     // Firebaseから取得した商品データが、この配列に入る
     let items = [];
+
 
     // -----------------------------------------
     // 商品の優先度を管理する
     // -----------------------------------------
 
     // 現在選択されている優先度
-    // 0：☆☆☆
-    // 1：☆★★
-    // 2：★★★
+    // 0：☆☆☆（通常）
+    // 1：☆☆★（低）
+    // 2：☆★★（中）
+    // 3：★★★（高）
     let selectedPriority = 0;
 
-　　
+
     // -----------------------------------------
     // 優先度変更モーダルの管理
     // -----------------------------------------
 
     // 現在、優先度を変更しようとしている商品
     let priorityTargetItem = null;
+
 
     // 優先度を変更する関数
     window.selectPriority = function(priority) {
@@ -689,15 +722,19 @@
         selectedPriority = priority;
 
         // 優先度選択ボタンを取得する
-        const buttons = document.querySelectorAll(".priority-select button");
+        const buttons = document.querySelectorAll(
+            ".priority-select button"
+        );
 
         // すべてのボタンの選択状態を更新する
         buttons.forEach((button, index) => {
-
-            button.classList.toggle("selected", index === priority);
-
+            button.classList.toggle(
+                "selected",
+                index === priority
+            );
         });
     };
+
 
     // -----------------------------------------
     // 優先度変更画面を開く
@@ -756,17 +793,17 @@
             Number(priorityTargetItem.priority || 0);
 
         // 優先度が正しい範囲か確認する
-        if (!Number.isInteger(newPriority) ||
+        if (
+            !Number.isInteger(newPriority) ||
             newPriority < 0 ||
-            newPriority > 3) {
-
+            newPriority > 3
+        ) {
             alert("正しい優先度を選択してください。");
             return;
         }
 
         // 同じ優先度が選択された場合
         if (newPriority === currentPriority) {
-
             alert("優先度に変更はありません。");
             return;
         }
@@ -822,7 +859,6 @@
     };
 
 
-
     // -----------------------------------------
     // 個数を増減する関数
     // -----------------------------------------
@@ -834,7 +870,10 @@
         const input = document.getElementById("quantity");
 
         // 個数が1以下になるのを防ぐ
-        input.value = Math.max(1, Number(input.value) + amount);
+        input.value = Math.max(
+            1,
+            Number(input.value) + amount
+        );
     }
 
 
@@ -847,18 +886,12 @@
 
         // 商品名・個数・メモの入力欄を取得する
         const nameInput = document.getElementById("name");
-
         const quantityInput = document.getElementById("quantity");
-
         const memoInput = document.getElementById("memo");
 
         // 入力された値を取得する
-        // trim()は文字列の先頭と末尾にある空白を取り除く
         const name = nameInput.value.trim();
-
-        // Number()によって文字列を数値に変換する
         const quantity = Number(quantityInput.value);
-
         const memo = memoInput.value.trim();
 
         // 選択されている優先度を取得する
@@ -902,9 +935,7 @@
                 deleteChecked: false,
 
                 // 優先度
-                // 選択された優先度を保存する
                 priority: priority
-
             });
 
             // 商品追加が成功したら入力欄を初期状態に戻す
@@ -922,7 +953,9 @@
         } catch (error) {
 
             // 商品追加に失敗した場合のメッセージ
-            alert("商品の追加に失敗しました。ログイン状態と通信を確認してください。");
+            alert(
+                "商品の追加に失敗しました。ログイン状態と通信を確認してください。"
+            );
 
             // エラーの詳細をブラウザの開発者ツールに表示する
             console.error(error);
@@ -938,28 +971,18 @@
 
         // Firebaseに接続しているか確認する
         if (!window.sharedShopping) {
-
-            // ログインしていない場合のメッセージ
             alert("Googleログインしてください。");
-
-            // 処理を終了する
             return;
         }
 
-
-        // items配列からcheckedがtrueの商品だけを取り出す
+        // items配列から削除対象の商品だけを取り出す
         const targets = items.filter(
             item => item.deleteChecked ?? item.checked ?? false
         );
 
-
         // 削除対象の商品が1件もない場合
         if (targets.length === 0) {
-
-            // メッセージを表示する
             alert("削除する商品にチェックを入れてください。");
-
-            // 処理を終了する
             return;
         }
 
@@ -973,11 +996,7 @@
 
             // Promise.all()によって複数の削除処理をまとめて実行する
             await Promise.all(
-
-                // targetsに入っている商品を1件ずつ処理する
                 targets.map(item =>
-
-                    // 商品IDを指定してFirebaseから削除する
                     window.sharedShopping.deleteItem(item.id)
                 )
             );
@@ -1003,28 +1022,30 @@
 <script type="module">
 
     // Firebaseアプリを初期化する機能を読み込む
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 
 
     // Firebase Authentication（ログイン認証）に必要な機能を読み込む
     import {
-        getAuth,              // Firebase認証機能を取得する
-        GoogleAuthProvider,   // Googleログイン用の認証プロバイダ
-        signInWithPopup,      // ポップアップ画面でログインする
-        onAuthStateChanged,   // ログイン状態の変化を監視する
-        signOut               // ログアウトする
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+        onAuthStateChanged,
+        signOut
     } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 
     // Cloud Firestore（データベース）に必要な機能を読み込む
     import {
-        getFirestore,         // Firestoreを取得する
-        collection,           // コレクションを指定する
-        addDoc,               // 新しいデータを追加する
-        updateDoc,            // 既存のデータを更新する
-        deleteDoc,            // データを削除する
-        doc,                  // ドキュメントを指定する
-        onSnapshot            // データの変更をリアルタイムで監視する
+        getFirestore,
+        collection,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        doc,
+        onSnapshot
     } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 
@@ -1032,29 +1053,13 @@
     // Firebaseの接続設定
     // -----------------------------------------
 
-    // Firebaseプロジェクトの情報を設定する
-    // この情報を使って、自分のFirebaseプロジェクトに接続する
     const firebaseConfig = {
-
-        // FirebaseプロジェクトのAPIキー
         apiKey: "AIzaSyARjqUQbzRzCohqksJQLcB6BCJ2aBRMXkI",
-
-        // Google認証に使用するドメイン
         authDomain: "shopping-memo-cdd46.firebaseapp.com",
-
-        // FirebaseプロジェクトのID
         projectId: "shopping-memo-cdd46",
-
-        // ファイル保存先のストレージ
         storageBucket: "shopping-memo-cdd46.firebasestorage.app",
-
-        // Firebaseプロジェクトの送信者ID
         messagingSenderId: "516050821193",
-
-        // Firebaseアプリを識別するID
         appId: "1:516050821193:web:a285fb3a4d1f383621df98",
-
-        // Google Analyticsの測定ID
         measurementId: "G-FLXCX0395Y"
     };
 
@@ -1083,18 +1088,12 @@
     // HTML要素の取得
     // -----------------------------------------
 
-    // Googleログインボタンを取得する
     const loginButton = document.getElementById("loginButton");
-
-    // ログアウトボタンを取得する
     const logoutButton = document.getElementById("logoutButton");
-
-    // ログイン状態を表示する場所を取得する
     const loginStatus = document.getElementById("loginStatus");
 
 
-    // Firestoreのリアルタイム監視を停止するための関数を保持する変数
-    // ログアウト時などに使用する
+    // Firestoreのリアルタイム監視を停止するための関数
     let unsubscribeItems = null;
 
 
@@ -1102,7 +1101,6 @@
     // Googleログイン処理
     // -----------------------------------------
 
-    // ログインボタンがクリックされたときに実行する
     loginButton.addEventListener("click", async () => {
 
         try {
@@ -1112,8 +1110,9 @@
 
         } catch (error) {
 
-            // ログインに失敗した場合、エラー内容を画面に表示する
-            loginStatus.textContent = "ログイン失敗: " + error.message;
+            // ログインに失敗した場合
+            loginStatus.textContent =
+                "ログイン失敗: " + error.message;
         }
     });
 
@@ -1122,7 +1121,6 @@
     // ログアウト処理
     // -----------------------------------------
 
-    // ログアウトボタンがクリックされたときに実行する
     logoutButton.addEventListener("click", async () => {
 
         try {
@@ -1132,8 +1130,9 @@
 
         } catch (error) {
 
-            // ログアウトに失敗した場合、エラー内容を表示する
-            loginStatus.textContent = "ログアウト失敗: " + error.message;
+            // ログアウトに失敗した場合
+            loginStatus.textContent =
+                "ログアウト失敗: " + error.message;
         }
     });
 
@@ -1142,7 +1141,6 @@
     // ログイン状態の監視
     // -----------------------------------------
 
-    // ログイン・ログアウトの状態が変化するたびに実行される
     onAuthStateChanged(auth, (user) => {
 
         // すでにFirestoreの監視を行っている場合
@@ -1151,10 +1149,8 @@
             // 以前の監視を停止する
             unsubscribeItems();
 
-            // 停止したことを示すためnullに戻す
             unsubscribeItems = null;
         }
-
 
         // 共有機能を一度リセットする
         window.sharedShopping = null;
@@ -1163,7 +1159,10 @@
         window.items = [];
 
 
-        // userが存在しない場合はログアウト状態
+        // -----------------------------------------
+        // ログアウト状態の場合
+        // -----------------------------------------
+
         if (!user) {
 
             // 商品一覧を空にする
@@ -1178,7 +1177,6 @@
             // ログアウトボタンを非表示にする
             logoutButton.hidden = true;
 
-            // 以降のログイン時の処理を行わず終了する
             return;
         }
 
@@ -1188,7 +1186,8 @@
         // -----------------------------------------
 
         // ログイン中のメールアドレスを表示する
-        loginStatus.textContent = "ログイン中: " + user.email;
+        loginStatus.textContent =
+            "ログイン中: " + user.email;
 
         // ログインボタンを非表示にする
         loginButton.hidden = true;
@@ -1198,7 +1197,7 @@
 
 
         // -----------------------------------------
-        // 商品データを操作するための関数をまとめる
+        // 商品データを操作するための関数
         // -----------------------------------------
 
         // window.sharedShoppingとして公開することで、
@@ -1216,14 +1215,17 @@
             }),
 
             // 商品を更新する関数
-            // idで対象商品を指定し、dataの内容に更新する
             updateItem: (id, data) =>
-                updateDoc(doc(db, "shoppingItems", id), data),
+                updateDoc(
+                    doc(db, "shoppingItems", id),
+                    data
+                ),
 
             // 商品を削除する関数
-            // idで対象商品を指定して削除する
             deleteItem: (id) =>
-                deleteDoc(doc(db, "shoppingItems", id))
+                deleteDoc(
+                    doc(db, "shoppingItems", id)
+                )
         };
 
 
@@ -1231,7 +1233,6 @@
         // Firestoreのリアルタイム監視
         // -----------------------------------------
 
-        // shoppingItemsのデータが変更されるたびに処理を実行する
         unsubscribeItems = onSnapshot(
 
             // 監視するコレクション
@@ -1261,18 +1262,17 @@
                 itemsReplace(window.items);
 
                 // 共有リストへの接続が完了したことを表示する
-                loginStatus.textContent = "共有リスト接続中: " + user.email;
+                loginStatus.textContent =
+                    "共有リスト接続中: " + user.email;
             },
 
 
-            // Firestoreの読み込みに失敗した場合の処理
+            // Firestoreの読み込みに失敗した場合
             (error) => {
 
-                // エラーメッセージを画面に表示する
                 loginStatus.textContent =
                     "共有リストを読み込めません。権限設定を確認してください。";
 
-                // エラーの詳細を開発者ツールに表示する
                 console.error("Firestore error:", error);
             }
         );
@@ -1297,7 +1297,6 @@
     function itemsReplace(newItems) {
 
         // 最初のscriptにあるupdateShoppingItems()を呼び出す
-        // ?.は、関数が存在する場合だけ実行するという意味
         window.updateShoppingItems?.(newItems);
     }
 
@@ -1306,7 +1305,6 @@
     // 商品一覧を画面に反映する関数
     // -----------------------------------------
 
-    // Firestoreから商品一覧を受け取ったときに呼び出される
     window.updateShoppingItems = (newItems) => {
 
         // 最初のscriptで使用するitems配列を更新する
@@ -1321,224 +1319,11 @@
 
 
     // =========================================
-    // 商品一覧の表示・並べ替え・操作を行う関数
+    // 商品編集モーダルの管理
     // =========================================
 
-    function renderSharedItems(newItems) {
-
-        // 商品一覧を表示するHTML要素を取得する
-        const list = document.getElementById("list");
-
-        // 以前表示されていた商品をすべて消去する
-        list.innerHTML = "";
-
-
-        // -----------------------------------------
-        // 商品が存在しない場合
-        // -----------------------------------------
-
-        if (newItems.length === 0) {
-
-            // 空であることを画面に表示する
-            list.innerHTML = '<div class="empty">買い物リストは空です。</div>';
-
-            // 以降の処理を行わず終了する
-            return;
-        }
-
-
-        // -----------------------------------------
-        // 商品の並べ替え
-        // -----------------------------------------
-
-        // 元のnewItems配列を直接変更しないようにコピーしてから並べ替える
-        const sortedItems = [...newItems].sort((a, b) => {
-
-            // 商品Aと商品Bの優先度を数値として取得する
-            // 優先度が未設定の場合は0とする
-            const priorityA = Number(a.priority || 0);
-            const priorityB = Number(b.priority || 0);
-
-
-            // 優先度が異なる場合
-            if (priorityA !== priorityB) {
-
-                // 優先度が高い商品を先にする
-                return priorityB - priorityA;
-            }
-
-
-            // 削除チェックの状態を取得する
-            // deleteCheckedがなければ、以前のcheckedを参照する
-            // どちらもなければfalseとする
-            const deleteA = a.deleteChecked ?? a.checked ?? false;
-            const deleteB = b.deleteChecked ?? b.checked ?? false;
-
-
-            // 削除チェックの状態が異なる場合
-            if (deleteA !== deleteB) {
-
-                // チェックなしの商品を先に、チェックありの商品を後にする
-                return deleteA ? 1 : -1;
-            }
-
-
-            // 優先度と削除チェックが同じ場合
-            // 追加日時が古い商品を先にする
-            return (a.createdAt || 0) - (b.createdAt || 0);
-        });
-
-
-        // -----------------------------------------
-        // 商品を1件ずつ画面に表示する
-        // -----------------------------------------
-
-        sortedItems.forEach((item) => {
-
-            // 商品1件分のdiv要素を作成する
-            const div = document.createElement("div");
-
-            // itemというCSSクラスを設定する
-            div.className = "item";
-
-
-            // -----------------------------------------
-            // 削除用チェックボックスの作成
-            // -----------------------------------------
-
-            // 削除対象にチェックが付いているか確認する
-            // 古いデータに対応するため、checkedも確認する
-            const deleteChecked =
-                item.deleteChecked ?? item.checked ?? false;
-
-
-            // 削除対象にチェックが付いている場合
-            if (deleteChecked) {
-
-                // checkedクラスを追加して背景色を変える
-                div.classList.add("checked");
-            }
-
-
-            // チェックボックスを作成する
-            const checkbox = document.createElement("input");
-
-            // input要素の種類をチェックボックスにする
-            checkbox.type = "checkbox";
-
-            // Firestoreに保存されているチェック状態を反映する
-            checkbox.checked = !!deleteChecked;
-
-
-            // チェック状態が変更されたときの処理
-            checkbox.addEventListener("change", async () => {
-
-                try {
-
-                    // 変更後のチェック状態をFirestoreに保存する
-                    await window.sharedShopping.updateItem(item.id, {
-                        deleteChecked: checkbox.checked
-                    });
-
-                } catch (error) {
-
-                    // 更新に失敗した場合のメッセージ
-                    alert("削除チェックの状態を更新できませんでした。");
-
-                    // エラーの詳細を表示する
-                    console.error(error);
-                }
-            });
-
-
-            // -----------------------------------------
-            // 商品名・個数・メモの表示領域
-            // -----------------------------------------
-
-            // 商品情報をまとめるdiv要素を作成する
-            const content = document.createElement("div");
-
-            // item-contentというCSSクラスを設定する
-            content.className = "item-content";
-
-
-            // 商品名を表示する要素を作成する
-            const name = document.createElement("div");
-
-            // item-nameというCSSクラスを設定する
-            name.className = "item-name";
-
-            // 商品名を設定する
-            name.textContent = item.name;
-
-
-            // 個数を表示する要素を作成する
-            const quantity = document.createElement("div");
-
-            // item-quantityというCSSクラスを設定する
-            quantity.className = "item-quantity";
-
-            // 商品の個数を「○個」という形式で表示する
-            quantity.textContent = `${item.quantity}個`;
-
-
-            // 商品名と個数を商品情報の領域に追加する
-            content.append(name, quantity);
-
-
-            // メモが入力されている場合
-            if (item.memo) {
-
-                // メモを表示する要素を作成する
-                const memo = document.createElement("div");
-
-                // item-memoというCSSクラスを設定する
-                memo.className = "item-memo";
-
-                // メモの内容を設定する
-                memo.textContent = item.memo;
-
-                // 商品情報の領域にメモを追加する
-                content.appendChild(memo);
-            }
-
-            // -----------------------------------------
-            // 優先度を表す星ボタンの作成
-            // -----------------------------------------
-
-            // 優先度を変更するボタンを作成する
-            const priority = document.createElement("button");
-
-            // priority-buttonというCSSクラスを設定する
-            priority.className = "priority-button";
-
-            // 現在の優先度を取得する
-            const currentPriority = Number(item.priority || 0);
-
-            // 優先度に応じて星を表示する
-            const priorityStars = [
-                "☆☆☆",
-                "☆☆★",
-                "☆★★",
-                "★★★"
-            ];
-
-            priority.textContent =
-                priorityStars[currentPriority] || "☆☆☆";
-
-            // 星ボタンを押したときに優先度変更画面を開く
-            priority.addEventListener("click", () => {
-
-                openPriorityModal(item);
-
-            });
-
-	　　
-    // -----------------------------------------
-    // 商品編集モーダルの管理
-    // -----------------------------------------
-
     // 現在編集している商品のID
+    // renderSharedItems()の外側で管理する
     let editingItemId = null;
 
 
@@ -1610,6 +1395,11 @@
             document.getElementById("editPriority").value
         );
 
+
+        // -----------------------------------------
+        // 入力内容の確認
+        // -----------------------------------------
+
         // 商品名が空欄の場合
         if (name === "") {
             alert("商品名を入力してください。");
@@ -1623,10 +1413,11 @@
         }
 
         // 優先度が正しい範囲か確認する
-        if (!Number.isInteger(priority) ||
+        if (
+            !Number.isInteger(priority) ||
             priority < 0 ||
-            priority > 3) {
-
+            priority > 3
+        ) {
             alert("正しい優先度を選択してください。");
             return;
         }
@@ -1637,8 +1428,13 @@
             return;
         }
 
+
+        // -----------------------------------------
+        // 編集対象の商品を確認
+        // -----------------------------------------
+
         // 現在の商品情報を取得する
-        const currentItem = items.find(
+        const currentItem = (window.items || []).find(
             item => item.id === editingItemId
         );
 
@@ -1648,6 +1444,11 @@
             closeEditModal();
             return;
         }
+
+
+        // -----------------------------------------
+        // 保存前の確認
+        // -----------------------------------------
 
         // 優先度が変更されているか確認する
         const currentPriority = Number(currentItem.priority || 0);
@@ -1683,6 +1484,11 @@
             }
         }
 
+
+        // -----------------------------------------
+        // Firebaseへの保存
+        // -----------------------------------------
+
         try {
 
             // Firebaseの商品情報を更新する
@@ -1711,18 +1517,198 @@
     };
 
 
-            
+    // =========================================
+    // 商品一覧の表示・並べ替え・操作を行う関数
+    // =========================================
+
+    function renderSharedItems(newItems) {
+
+        // 商品一覧を表示するHTML要素を取得する
+        const list = document.getElementById("list");
+
+        // 以前表示されていた商品をすべて消去する
+        list.innerHTML = "";
+
+
+        // -----------------------------------------
+        // 商品が存在しない場合
+        // -----------------------------------------
+
+        if (newItems.length === 0) {
+
+            list.innerHTML =
+                '<div class="empty">買い物リストは空です。</div>';
+
+            return;
+        }
+
+
+        // -----------------------------------------
+        // 商品の並べ替え
+        // -----------------------------------------
+
+        // 元のnewItems配列を直接変更しないようにコピーしてから並べ替える
+        const sortedItems = [...newItems].sort((a, b) => {
+
+            // 商品Aと商品Bの優先度を数値として取得する
+            // 優先度が未設定の場合は0とする
+            const priorityA = Number(a.priority || 0);
+            const priorityB = Number(b.priority || 0);
+
+            // 優先度が異なる場合
+            if (priorityA !== priorityB) {
+
+                // 優先度が高い商品を先にする
+                return priorityB - priorityA;
+            }
+
+
+            // 削除チェックの状態を取得する
+            const deleteA = a.deleteChecked ?? a.checked ?? false;
+            const deleteB = b.deleteChecked ?? b.checked ?? false;
+
+            // 削除チェックの状態が異なる場合
+            if (deleteA !== deleteB) {
+
+                // チェックなしの商品を先に、チェックありの商品を後にする
+                return deleteA ? 1 : -1;
+            }
+
+
+            // 優先度と削除チェックが同じ場合
+            // 追加日時が古い商品を先にする
+            return (a.createdAt || 0) - (b.createdAt || 0);
+        });
+
+
+        // -----------------------------------------
+        // 商品を1件ずつ画面に表示する
+        // -----------------------------------------
+
+        sortedItems.forEach((item) => {
+
+            // 商品1件分のdiv要素を作成する
+            const div = document.createElement("div");
+
+            div.className = "item";
+
+
+            // -----------------------------------------
+            // 削除用チェックボックスの作成
+            // -----------------------------------------
+
+            // 削除対象にチェックが付いているか確認する
+            const deleteChecked =
+                item.deleteChecked ?? item.checked ?? false;
+
+            // 削除対象にチェックが付いている場合
+            if (deleteChecked) {
+                div.classList.add("checked");
+            }
+
+            // チェックボックスを作成する
+            const checkbox = document.createElement("input");
+
+            checkbox.type = "checkbox";
+            checkbox.checked = !!deleteChecked;
+
+
+            // チェック状態が変更されたときの処理
+            checkbox.addEventListener("change", async () => {
+
+                try {
+
+                    // 変更後のチェック状態をFirestoreに保存する
+                    await window.sharedShopping.updateItem(
+                        item.id,
+                        {
+                            deleteChecked: checkbox.checked
+                        }
+                    );
+
+                } catch (error) {
+
+                    alert("削除チェックの状態を更新できませんでした。");
+
+                    console.error(error);
+                }
+            });
+
+
+            // -----------------------------------------
+            // 商品名・個数・メモの表示領域
+            // -----------------------------------------
+
+            const content = document.createElement("div");
+
+            content.className = "item-content";
+
+
+            // 商品名を表示する要素を作成する
+            const name = document.createElement("div");
+
+            name.className = "item-name";
+            name.textContent = item.name;
+
+
+            // 個数を表示する要素を作成する
+            const quantity = document.createElement("div");
+
+            quantity.className = "item-quantity";
+            quantity.textContent = `${item.quantity}個`;
+
+
+            // 商品名と個数を商品情報の領域に追加する
+            content.append(name, quantity);
+
+
+            // メモが入力されている場合
+            if (item.memo) {
+
+                const memo = document.createElement("div");
+
+                memo.className = "item-memo";
+                memo.textContent = item.memo;
+
+                content.appendChild(memo);
+            }
+
+
+            // -----------------------------------------
+            // 優先度を表す星ボタンの作成
+            // -----------------------------------------
+
+            const priority = document.createElement("button");
+
+            priority.className = "priority-button";
+
+            // 現在の優先度を取得する
+            const currentPriority = Number(item.priority || 0);
+
+            // 優先度に応じて星を表示する
+            const priorityStars = [
+                "☆☆☆",
+                "☆☆★",
+                "☆★★",
+                "★★★"
+            ];
+
+            priority.textContent =
+                priorityStars[currentPriority] || "☆☆☆";
+
+            // 星ボタンを押したときに優先度変更画面を開く
+            priority.addEventListener("click", () => {
+                openPriorityModal(item);
+            });
+
+
             // -----------------------------------------
             // 商品編集ボタンの作成
             // -----------------------------------------
 
-            // 編集ボタンを作成する
             const editButton = document.createElement("button");
 
-            // CSSクラスを設定する
             editButton.className = "edit-button";
-
-            // ボタンに表示する文字
             editButton.textContent = "✏️ 編集";
 
             // 編集ボタンが押されたときの処理
@@ -1730,7 +1716,6 @@
 
                 // 対象商品の編集画面を開く
                 openEditModal(item);
-
             });
 
 
@@ -1738,10 +1723,8 @@
             // 商品カード内の操作領域
             // -----------------------------------------
 
-            // 星ボタンと編集ボタンをまとめる
             const actions = document.createElement("div");
 
-            // CSSクラスを設定する
             actions.className = "item-actions";
 
             // 星ボタンと編集ボタンを追加する
